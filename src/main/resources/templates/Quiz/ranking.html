@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranking - Quiz App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Styl ogólny dla trybu ciemnego */
+    body.dark-mode { background: #121212 !important; color: #ffffff !important; }
+
+    /* Naprawa czytelności nagłówków i tekstów w trybie ciemnym */
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode p, body.dark-mode td, body.dark-mode th {
+      color: #ffffff !important;
+    }
+
+    /* Styl tabeli w trybie ciemnym - CZARNA TABELA */
+    body.dark-mode .table {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #444 !important;
+    }
+    body.dark-mode .table th, body.dark-mode .table td {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-bottom: 1px solid #333 !important;
+    }
+    body.dark-mode .table-striped>tbody>tr:nth-of-type(odd)>* {
+      background-color: #1a1a1a !important; /* Lekko jaśniejszy czarny dla pasów */
+      color: #ffffff !important;
+    }
+
+    /* Styl karty/kontenera */
+    body.dark-mode .card { background: #1e1e1e !important; border: 1px solid #333 !important; }
+
+    /* Styl trybu jasnego */
+    body.light-mode { background: #f8f9fa; color: #212529; }
+    .navbar-custom { background-color: #6f42c1 !important; padding: 0.5rem 1rem; }
+    .container { margin-top: 50px; }
+  </style>
+</head>
+<body id="body">
+
+<nav class="navbar navbar-dark navbar-custom shadow-sm mb-5">
+  <div class="container-fluid">
+    <span class="navbar-brand fw-bold">Quiz App - Ranking</span>
+    <a href="/Quiz/categories" class="btn btn-outline-light btn-sm">Powrót do menu</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="card shadow p-4">
+    <h1 class="mb-4 text-center fw-bold">🏆 Globalny Ranking</h1>
+    <table class="table table-hover table-striped">
+      <thead class="table-dark">
+      <tr>
+        <th>Miejsce</th>
+        <th>Użytkownik</th>
+        <th>Łączny Wynik</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="r, stat : ${rankings}">
+        <td class="fw-bold" th:text="${stat.index + 1} + '.'"></td>
+        <td th:text="${r.username}"></td>
+        <td th:text="${r.totalScore}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const savedTheme = localStorage.getItem("quiz_theme") || "dark";
+  document.getElementById("body").className = savedTheme + "-mode";
+</script>
+</body>
+</html>
