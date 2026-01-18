@@ -47,7 +47,6 @@ public class AuthController {
         return "redirect:/Quiz/login";
     }
 
-    // --- NOWE METODY DO ZMIANY HASŁA ---
 
     @GetMapping("/change-password")
     public String changePasswordPage() {
@@ -56,7 +55,6 @@ public class AuthController {
 
     @PostMapping("/change-password")
     public String changePassword(@RequestParam String newPassword, Principal principal) {
-        // Principal to aktualnie zalogowany użytkownik
         String username = principal.getName();
 
         User user = userRepository.findByUsername(username).orElse(null);
