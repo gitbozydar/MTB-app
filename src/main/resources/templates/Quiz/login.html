@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Logowanie</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #1a1a1a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .card { background: #2e2e2e; border: 1px solid #444; color: white; width: 100%; max-width: 400px; }
+    .form-control { background: #121212; border-color: #444; color: white; }
+    .form-control:focus { background: #121212; color: white; box-shadow: none; border-color: #6f42c1; }
+    .btn-primary { background-color: #6f42c1; border-color: #6f42c1; }
+    .btn-primary:hover { background-color: #5a32a3; }
+  </style>
+</head>
+<body>
+<div class="card shadow p-4">
+  <h2 class="text-center mb-4">Zaloguj się</h2>
+
+  <form th:action="@{/Quiz/login}" method="post">
+    <div class="mb-3">
+      <label>Login</label>
+      <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Hasło</label>
+      <input type="password" name="password" class="form-control" required>
+    </div>
+    <button class="btn btn-primary w-100">Wejdź</button>
+    <div th:if="${param.error}" class="alert alert-danger mt-3 py-2">Błędny login lub hasło</div>
+  </form>
+
+  <p class="mt-3 text-center">Nie masz konta? <a href="/Quiz/register" class="text-info">Zarejestruj się</a></p>
+</div>
+</body>
+</html>

@@ -10,6 +10,21 @@
     body.dark-mode h1, body.dark-mode h2, body.dark-mode label, body.dark-mode p { color: #ffffff !important; }
     body.dark-mode .form-control { background: #121212 !important; color: #ffffff !important; border-color: #444 !important; }
 
+    /* Kolor placeholdera w trybie ciemnym */
+    body.dark-mode .form-control::placeholder {
+      color: #cccccc !important;
+      opacity: 1;
+    }
+
+    /* WAŻNE: To sprawia, że guzik powrotu jest biały w trybie ciemnym */
+    body.dark-mode .btn-outline-secondary {
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    body.dark-mode .btn-outline-secondary:hover {
+      background-color: #333 !important;
+    }
+
     body.light-mode { background: #f8f9fa; color: #212529; }
     .container { margin-top: 100px; }
   </style>
@@ -25,12 +40,19 @@
       <input type="hidden" name="score" th:value="${score}">
       <div class="mb-3">
         <label class="form-label">Wpisz swój nick, aby zapisać wynik:</label>
-        <input type="text" name="username" class="form-control form-control-lg text-center" placeholder="Twój nick..." required>
+
+        <input type="text" name="username"
+               class="form-control form-control-lg text-center"
+               placeholder="Twój nick..."
+               th:value="${#authentication.name}"
+               required>
       </div>
       <button class="btn btn-primary btn-lg w-100 shadow">Zapisz i zobacz ranking</button>
     </form>
+
     <hr>
-    <a href="/Quiz/categories" class="btn btn-outline-secondary">Powrót do menu bez zapisu</a>
+
+    <a href="/Quiz/categories" class="btn btn-outline-secondary w-100">Powrót do menu bez zapisu</a>
   </div>
 </div>
 
